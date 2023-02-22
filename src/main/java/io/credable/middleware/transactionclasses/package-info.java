@@ -6,4 +6,4 @@
 //
 
 @jakarta.xml.bind.annotation.XmlSchema(namespace = "http://credable.io/cbs/transaction", elementFormDefault = jakarta.xml.bind.annotation.XmlNsForm.QUALIFIED)
-package com.example.middleware.soap.transaction;
+package io.credable.middleware.transactionclasses;

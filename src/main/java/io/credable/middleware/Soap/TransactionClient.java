@@ -14,23 +14,30 @@ import java.util.List;
 
 
 @Service
-public class TransactionClient  extends WebServiceGatewaySupport {
+public class TransactionClient extends WebServiceGatewaySupport {
 
-    //private static final Logger LOGGER = LoggerFactory.getLogger(TransactionClient.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(TransactionClient.class.getName());
+
     @Autowired
     private WebServiceTemplate webServiceTemplate;
 
+//    @Autowired
+//    public TransactionClient(WebServiceTemplate webServiceTemplate) {
+//        this.webServiceTemplate = webServiceTemplate;
+//    }
+
     public List<TransactionData> getTransactions(String customerNumber) {
         TransactionsRequest request = new TransactionsRequest();
+        log.info("request initiation" + request);
         request.setCustomerNumber(customerNumber);
 
         TransactionsResponse response = (TransactionsResponse) webServiceTemplate
                 .marshalSendAndReceive("https://trxapitest.credable.io/service/transaction-data", request);
+        log.info("passed successful");
 
         return response.getTransactions();
+
     }
-
-
 
 
 }

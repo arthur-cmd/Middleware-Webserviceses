@@ -21,43 +21,42 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/transactions/")
+@RequestMapping("/transactionsApi")
 public class TransactionController {
-    private static final Logger log = LoggerFactory.getLogger(TransactionController.class);
+    private static final Logger log = LoggerFactory.getLogger(TransactionController.class.getName());
 
-    private final TransactionClient client;
+    private final TransactionClient transactionClient;
    // private TransactionsResponse response;
 
     @Autowired
-    public TransactionController( TransactionClient client){
-        this.client=client;
+    public TransactionController(TransactionClient transactionClient){
+        this.transactionClient=transactionClient;
 
     }
 
     //mapping from the transaction soap
-    @GetMapping("{customerNumber}")
+    @GetMapping("/{customerNumber}")
     @ResponseBody
-    public ResponseEntity<List<TransactionData>> getTransactions(@PathVariable String customerNumber){
+    public ResponseEntity<Object> getTransactions(@PathVariable String customerNumber){
 
-        List<TransactionData> transactiondata = client.getTransactions(customerNumber);
-        log.info("these are data for" + transactiondata );
-        return  new ResponseEntity<>(transactiondata,HttpStatus.OK);
+        List<TransactionData> transactionData = transactionClient.getTransactions(customerNumber);
+        log.info("these are data for" + transactionData );
+        return  new ResponseEntity<>(transactionData,HttpStatus.OK);
     }
 
 
-//    @GetMapping("{customerNumber}")
-//    public List<TransactionData> invokeSoapClientToTransactionList(@PathVariable String customerNumber){
-//       // TransactionsResponse response = new TransactionsResponse();
-//        TransactionsRequest transactionsRequest= new TransactionsRequest();
-//        //CustomerRequest customerRequest = new CustomerRequest();
-//        transactionsRequest.setCustomerNumber(transactionsRequest.getCustomerNumber());
-//        //customerRequest.setCustomerNumber(customerRequest.getCustomerNumber());
-//        // return response.getCustomer();
+//    @GetMapping  ("{customerNumber}")
+//    public  ResponseEntity<List<TransactionData>> invokeTransactionClientToGetCustomerNumber(@PathVariable String customerNumber){
+//
 //        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Webconfiguration.class);
 //        client = context.getBean(TransactionClient.class);
-//        List<TransactionData> response = client.getTransactions(customerNumber);
-//         return  response.listIterator();
-//}
+//        List<TransactionData> transactionData = client.getTransactions(customerNumber);
+//        return new ResponseEntity<>(transactionData,HttpStatus.OK);
+//
+//    }
+
+
+
 
 
 

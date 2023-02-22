@@ -8,10 +8,7 @@
 
 package io.credable.middleware.transactionclasses;
 
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlSchemaType;
-import jakarta.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.*;
 
 import javax.xml.datatype.XMLGregorianCalendar;
 
@@ -67,6 +64,7 @@ public class Account {
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar createdAt;
     @XmlSchemaType(name = "dateTime")
+
     protected XMLGregorianCalendar createdDate;
     @XmlSchemaType(name = "string")
     protected Currency currency;
