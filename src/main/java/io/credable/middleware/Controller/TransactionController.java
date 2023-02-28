@@ -35,12 +35,12 @@ public class TransactionController {
     }
 
     //mapping from the transaction soap
-    @GetMapping("/{customerNumber}")
+    @PostMapping ("/{customerNumber}")
     @ResponseBody
     public ResponseEntity<Object> getTransactions(@PathVariable String customerNumber){
 
         List<TransactionData> transactionData = transactionClient.getTransactions(customerNumber);
-        log.info("these are data for" + transactionData );
+        log.info("these are data for " + transactionData );
         return  new ResponseEntity<>(transactionData,HttpStatus.OK);
     }
 
